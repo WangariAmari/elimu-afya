@@ -9,7 +9,7 @@ elimu-afya/
    ├─ package.json
    └─ src/
       ├─ main.jsx
-      ├─ app.jsx
+      ├─ App.jsx
       └─ components/
          ├─ Login.jsx
          └─ Patients.jsx
