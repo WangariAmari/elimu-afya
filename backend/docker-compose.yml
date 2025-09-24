@@ -1,0 +1,49 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: theoapp
+      POSTGRES_USER: theoapp
+      POSTGRES_PASSWORD: theoapp_pass
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - theo_net
+
+  backend:
+    build: ./backend
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_NAME=theoapp
+      - DATABASE_USER=theoapp
+      - DATABASE_PASSWORD=theoapp_pass
+      - DATABASE_PORT=5432
+      - DEBUG=1
+    depends_on:
+      - db
+    networks:
+      - theo_net
+
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - theo_net
+
+volumes:
+  db_data:
+
+networks:
+  theo_net:

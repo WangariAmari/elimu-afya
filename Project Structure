@@ -1,0 +1,15 @@
+elimu-afya/
+├─ backend/
+│  ├─ Dockerfile
+│  ├─ docker-compose.yml
+│  ├─ manage.py
+│  ├─ elimu-afya/  # django project
+│  └─ core/     # main app: models, serializers, views
+└─ frontend/
+   ├─ package.json
+   └─ src/
+      ├─ main.jsx
+      ├─ app.jsx
+      └─ components/
+         ├─ Login.jsx
+         └─ Patients.jsx
