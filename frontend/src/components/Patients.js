@@ -11,14 +11,24 @@ export default function Patients({token}){
       .catch(err=>console.error(err));
   },[token]);
 
-  return (
-    <div>
-      <h3>Patients</h3>
-      <ul>
-        {patients.map(p=>(
-          <li key={p.id}>{p.first_name} {p.last_name} — MRN: {p.medical_record_number}</li>
-        ))}
-      </ul>
-    </div>
+  return React.createElement(
+    'div',
+    null,
+    React.createElement('h3', null, 'Patients'),
+    React.createElement(
+      'ul',
+      null,
+      patients.map(p=>
+        React.createElement(
+          'li',
+          {key: p.id},
+          p.first_name,
+          ' ',
+          p.last_name,
+          ' — MRN: ',
+          p.medical_record_number
+        )
+      )
+    )
   );
 }
