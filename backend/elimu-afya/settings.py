@@ -33,7 +33,7 @@ DATABASES = {
         "NAME": os.getenv("DATABASE_NAME","theoapp"),
         "USER": os.getenv("DATABASE_USER","theoapp"),
         "PASSWORD": os.getenv("DATABASE_PASSWORD","theoapp_pass"),
-        "HOST": os.getenv("DATABASE_HOST","db"),
+        "HOST": os.getenv("DATABASE_HOST","localhost"),
         "PORT": os.getenv("DATABASE_PORT","5432"),
     }
 }
