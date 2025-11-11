@@ -1,0 +1,51 @@
+# Multi-stage production Dockerfile with gunicorn
+
+# ---------- builder: build wheels for dependencies ----------
+FROM python:3.11-slim AS builder
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+WORKDIR /app
+
+# Install build deps for wheels (removed later)
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential libpq-dev gcc \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN python -m pip install --upgrade pip setuptools wheel \
+ && python -m pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
+
+# ---------- runtime: small image with only runtime deps + app ----------
+FROM python:3.11-slim AS runtime
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# Install system libraries required at runtime (e.g. libpq for Postgres)
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends libpq5 \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install python deps from the pre-built wheels
+COPY --from=builder /wheels /wheels
+COPY requirements.txt .
+RUN python -m pip install --upgrade pip \
+ && python -m pip install --no-cache-dir /wheels/*
+
+# Copy app source
+COPY . .
+
+# Create non-root user and fix permissions
+RUN addgroup --system django && adduser --system --ingroup django django \
+ && chown -R django:django /app
+
+USER django
+
+ENV PORT=8000
+EXPOSE 8000
+
+# NOTE:
+# - Ensure DJANGO_SETTINGS_MODULE is set in your orchestration (e.g. docker-compose / k8s)
+# - Run collectstatic / migrations as part of your deployment process (not inside gunicorn CMD)
+CMD ["gunicorn", "elimu_afya.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--log-level", "info"]
