@@ -8,8 +8,8 @@ elimu-afya/
 └─ frontend/
    ├─ package.json
    └─ src/
-      ├─ main.jsx
-      ├─ App.jsx
+      ├─ main.js
+      ├─ App.js
       └─ components/
-         ├─ Login.jsx
-         └─ Patients.jsx
+         ├─ Login.js
+         └─ Patients.js
