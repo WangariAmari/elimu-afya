@@ -11,6 +11,10 @@ class IsPractitioner(permissions.BasePermission):
 class IsLecturer(permissions.BasePermission):
     def has_permission(self, request, view):
         return getattr(request.user, "role", None) == "lecturer" or request.user.is_superuser
+    
+class IsLecturerOrPractitioner(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return getattr(request.user, "role", None) in ("lecturer", "practitioner") or request.user.is_superuser
 
 class PatientViewSet(viewsets.ModelViewSet):
     queryset = Patient.objects.all().order_by("-created_at")
@@ -36,7 +40,8 @@ class CaseStudyViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action in ["create"]:
-            return [permissions.IsLecturer() | IsPractitioner()]
+            # return [permissions.IsLecturer() | IsPractitioner()] 
+            return [IsLecturerOrPractitioner()]
         return [permissions.IsAuthenticated()]
 
 class AssessmentViewSet(viewsets.ModelViewSet):
