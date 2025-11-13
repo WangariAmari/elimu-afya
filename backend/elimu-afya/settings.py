@@ -30,11 +30,11 @@ CORS_ALLOW_ALL_ORIGINS = True  # change for prod
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DATABASE_NAME","theoapp"),
+        "NAME": os.getenv("DATABASE_NAME","elimuafya"),
         "USER": os.getenv("DATABASE_USER","theoapp"),
         "PASSWORD": os.getenv("DATABASE_PASSWORD","theoapp_pass"),
         "HOST": os.getenv("DATABASE_HOST","localhost"),
-        "PORT": os.getenv("DATABASE_PORT","5432"),
+        "PORT": os.getenv("DATABASE_PORT","5433"),
     }
 }
 

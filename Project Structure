@@ -1,15 +1,27 @@
 elimu-afya/
 ├─ backend/
-│  ├─ Dockerfile
-│  ├─ docker-compose.yml
-│  ├─ manage.py
-│  ├─ elimu-afya/  # django project
-│  └─ core/     # main app: models, serializers, views
-└─ frontend/
-   ├─ package.json
-   └─ src/
-      ├─ main.js
-      ├─ App.js
-      └─ components/
-         ├─ Login.js
-         └─ Patients.js
+│  ├─ Dockerfile           # django app
+│  ├─ manage.py            # django management script
+│  ├─ requirements.txt     # python dependencies
+│  ├─ elimu-afya/          # django project
+│  │  ├─ settings.py       # django settings
+│  │  ├─ urls.py           # project urls
+│  └─ core/                # main app: models, serializers, views
+│     ├─ models.py         # data models
+│     ├─ serializers.py    # data serializers
+│     ├─ views.py          # api views
+│     └─ urls.py           # app urls
+├─ frontend/ 
+|  ├─ Dockerfile           # react app
+|  ├─ package.json         # react dependencies
+│  └─ src/                 # source code
+│     ├─ main.js           # entry point
+│     ├─ App.js            # main app component
+│     └─ components/       # react components
+│        ├─ Login.js       # login component
+│        ├─ Patients.js    # patients component
+│        └─ Dashboard.js   # dashboard component
+├─ docker-compose.yml      # orchestrates backend and frontend
+├─ .gitignore              # git ignore file
+├─ README.md               # project documentation
+└─ .env                    # environment variables for configuration 
