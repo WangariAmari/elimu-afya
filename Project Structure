@@ -1,4 +1,4 @@
-elimu-afya/
+Elimu-Afya/
 ├─ backend/
 │  ├─ Dockerfile           # django app
 │  ├─ manage.py            # django management script
@@ -21,7 +21,10 @@ elimu-afya/
 │        ├─ Login.js       # login component
 │        ├─ Patients.js    # patients component
 │        └─ Dashboard.js   # dashboard component
-├─ docker-compose.yml      # orchestrates backend and frontend
+├─ docker-compose.prod.yml # production docker-compose configuration
+├─ docker-compose.yml      # orchestrates backend and frontend 
 ├─ .gitignore              # git ignore file
-├─ README.md               # project documentation
+├─ README.md               # project documentation 
+├─ nginx/                  # nginx server
+│  └─ nginx.conf           # nginx configuration
 └─ .env                    # environment variables for configuration 
