@@ -17,8 +17,12 @@ const Home = () => {
         </div>
 
         <div className="auth-buttons">
-          <a href="#" className="auth-link">Log in</a>
-          <a href="#" className="auth-link primary">Sign up</a>
+          <a href="#" className="auth-link">
+            Log in
+          </a>
+          <a href="#" className="auth-link primary">
+            Sign up
+          </a>
         </div>
       </nav>
 

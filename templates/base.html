@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}{% endblock %} - Bridging medical training with clinical
+      practice
+    </title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <header class="bg-sky-600 shadow-md">
+      <nav class="flex justify-between items-center p-4 text-white">
+        <a
+          class="text-xl font-bold"
+          href="#"
+          onclick="
+            window.location.reload();
+            return false;
+          "
+          >ElimuAfya</a
+        >
+
+        <div>
+          {% block navbar %}
+          <a
+            href="{{ url_for('student_dashboard') }}"
+            class="ml-4 hover:underline"
+            >Dashboard</a
+          >
+          {% endblock %}
+        </div>
+      </nav>
+    </header>
+
+    <main class="flex-1 overflow-auto {{ main_classes | default('') }}">
+      {% block content %} {% endblock %}
+    </main>
+
+    <footer class="py-2 bg-sky-600 text-white w-full mt-auto">
+      <p class="text-sm text-center">
+        ElimuAfya &copy; Bridging medical training with clinical practice
+      </p>
+    </footer>
+
+    <script type="module" src="/src/main.jsx"></script>
+    {% block scripts %}
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard-interactions.js') }}"></script>
+    {% endblock %}
+  </body>
+</html>
